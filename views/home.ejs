@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      h1 {
+        margin-top: 50px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <h1>URL Shortener</h1>
+    <% if (locals.id) { %>
+    <p style="font-weight: 500">Shortened URL:</p>
+    <a
+      href="http://localhost:8001/<%= locals.id %>"
+      style="font-size: 1.2em; color: #007bff; text-decoration: none"
+      >http://localhost:3000/<%= locals.id %></a
+    >
+    <br /><br />
+    <% } %>
+    <form action="/url" method="POST">
+      <div style="margin-top: 20px">
+        <label for="url" style="font-size: 1.2em">Enter original URL:</label>
+        <input
+          type="text"
+          id="url"
+          name="url"
+          placeholder="https://www.example.com"
+          style="
+            width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+          "
+        />
+        <button
+          type="submit"
+          style="
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+          "
+        >
+          Shorten
+        </button>
+      </div>
+    <div>
+      <% if (locals.urls) { %>
+      <table style="width: 80%; margin: 20px auto; border-collapse: collapse; border: 1px solid #ddd;">
+        <thead>
+        <tr>
+          <th style="border: 1px solid #ddd; padding: 8px;">S. No</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Short Id</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Redirect url</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Clicks</th>
+        </tr>
+        </thead>
+        <tbody>
+          <% urls.forEach((url, index) => { %>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;"><%= index+1 %></td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><%= url.shortId %></td>
+          <td style="border: 1px solid #ddd; padding: 8px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= url.redirectUrl %></td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><%= url.visitHistory.length %></td>
+        </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+    </form>
+  </body>
+</html>
