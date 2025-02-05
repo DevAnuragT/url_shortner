@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Login</h1>
+    <form action="/user/login" method="POST" style="max-width: 400px; margin: auto;">
+        <div style="margin-bottom: 15px;">
+            <label for="email" style="display: block; margin-bottom: 5px;">Email: </label>
+            <input type="email" name="email" placeholder="Enter email" required style="width: 100%; padding: 10px; box-sizing: border-box;" />
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label for="password" style="display: block; margin-bottom: 5px;">Password: </label>
+            <input type="password"  name="password" placeholder="Enter password" required style="width: 100%; padding: 10px; box-sizing: border-box;" />
+        </div>
+        <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Login</button>
+        <br> <br>
+        <a href="/signup" style="display: block; text-align: center; text-decoration: none;">
+            <button type="button" style="width: 100%; padding: 10px; background-color: #4238c9; color: white; border: none; cursor: pointer;">
+                Sign Up
+            </button>
+        </a>
+        
+    </form>
+    <br>
+    <% if (locals.error) { %>
+        <p style="color: red; text-align: center;"><%= locals.error %></p>
+    <% } %>
+</body>
+</html>

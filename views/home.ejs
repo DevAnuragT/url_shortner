@@ -21,9 +21,9 @@
     <% if (locals.id) { %>
     <p style="font-weight: 500">Shortened URL:</p>
     <a
-      href="http://localhost:8001/<%= locals.id %>"
+      href="http://localhost:8001/url/<%= locals.id %>"
       style="font-size: 1.2em; color: #007bff; text-decoration: none"
-      >http://localhost:3000/<%= locals.id %></a
+      >http://localhost/url/<%= locals.id %></a
     >
     <br /><br />
     <% } %>
@@ -56,7 +56,7 @@
           "
         >
           Shorten
-        </button>
+        </button>  
       </div>
     <div>
       <% if (locals.urls) { %>

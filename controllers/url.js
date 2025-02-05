@@ -13,22 +13,11 @@ async function generateShortUrl(req, res) {
     shortId,
     redirectUrl: url, // Use "url" from request body
     visitHistory: [],
+    createdBy: req.user._id, // _id is a property of req.user
   });
+  const urls = await Url.find({});
 
-  return res.status(201).json({ shortId });
+  return res.render("home", { id: shortId, urls: urls});
 }
 
-async function getAnalytics(req, res) {
-  const { shortId } = req.params;
-
-  const entry = await Url.findOne({ shortId });
-  if (!entry) {
-    return res.status(404).json({ message: "Url not found" });
-  }
-  return res.json({
-    totalClicks: entry.visitHistory.length,
-    timestamp: entry.visitHistory,
-  });
-}
-
-module.exports = { generateShortUrl, getAnalytics };
+module.exports = { generateShortUrl};
