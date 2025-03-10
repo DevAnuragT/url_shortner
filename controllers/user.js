@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
-const { setSessionId } = require("../services/auth");
+const { setUser, getUser } = require("../services/auth");
 
 async function handleUserSignup(req, res) {
     const { name, email, password } = req.body;
@@ -31,10 +31,8 @@ async function handleUserLogin(req, res) {
     if (!isMatch) {
         return res.render("login", { error: "Invalid email or password" });
     }
-
-    const sessionId = uuidv4();
-    setSessionId(sessionId, user);
-    res.cookie("uid", sessionId, { httpOnly: true }); // Secure cookie
+    const token = setUser(user);
+    res.cookie("uid", token);
     
     return res.redirect("/");
 }
