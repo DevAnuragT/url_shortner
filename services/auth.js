@@ -4,7 +4,8 @@ const secret= 'mysecretkey';
 function setUser(user){
   return jwt.sign({
     _id: user._id,
-    email: user.email
+    email: user.email,
+    role: user.role
   },
   secret);
 }
@@ -29,7 +30,7 @@ module.exports = {
 //tokens are stateless
 //session are stateful
 //tokens are stored in client side
-//session are  stored in server side
+//session are stored in server side
 //tokens are used for api, coz tokens are longer sessions
 //banks use session, coz they need you to be logged in just for a session
 //tokens are faster
